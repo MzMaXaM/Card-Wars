@@ -65,7 +65,7 @@ h2{
     transform: rotateY(180deg);
 }  
 .cardFront {
-    background-color: #bbb;
+    background-color: #bbb; 
     color: black;
 }
 
