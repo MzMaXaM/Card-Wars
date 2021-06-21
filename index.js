@@ -1,7 +1,6 @@
 //  
 // http://deckofcardsapi.com/
 //
-
 const deckOfCards = ['2','3','4','5','6','7','8','9','0','J','Q','K','A']
 const playerCard = document.getElementById('playerCard')
 const compCard = document.getElementById('compCard')
@@ -19,7 +18,6 @@ let compPile = []
 let compCardCode
 let roundWinner
 let hitCount = 0
-let itsWar = false
 
 const getCards = async (count) => {
     const res = await fetch('https://deckofcardsapi.com/api/deck/'+key+'/draw/?count='+count)
@@ -45,7 +43,7 @@ function setPoints() {
 function autoBattle() {
     let i = 0
     for (i=0; i<10000; i++){
-        if ((compPile.length < 2)&&(compPile.length < 2)){break}
+        if ((compPile.length < 1)||(compPile.length < 1)){break}
         getCardsFn()
     }
     console.log('autoCount: '+ i)
@@ -77,62 +75,34 @@ function getCardsFn() {
     compCardCode = compPile.shift()
     arrangeCards()
 }
-warCardToggle=()=>{
-    if (itsWar){
-        playerWarCard.classList.toggle("visibilityStyle")
-        compWarCard.classList.toggle("visibilityStyle")
-    }
-}
-classToggleFn=()=>{
-    playerCard.classList.toggle("transitStyle")
-    compCard.classList.toggle("transitStyle")
-}
-cleanTable = ()=>{
-    if (roundWinner=='player'){
-        playerCard.style.transform = "translateX(0%) "
-        compCard.style.transform = "translateX(0%) translateY(140%)"
-        classToggleFn()
-    }else if (roundWinner=='comp') {
-        playerCard.style.transform = "translateX(0%) translateY(-145%)"
-        compCard.style.transform = "translateX(0%)"
-        classToggleFn()
-    }else if (roundWinner=='war') {
-        if (playerCardCode.charAt(0)==compCardCode.charAt(0)){
-        itsWar=true
-        warCardToggle()}
-        // playerCard.style.transform = "rotateY(0deg) translateX(140%) translateY(0)"
-        // compCard.style.transform = "rotateY(0deg) translateX(140%) translateY(0)"
-        classToggleFn()
-    }
+function cleanTable (data) {
+    if (data=='player'){
+        playerCard.style.transform = "translateX(50%)"
+        compCard.style.transform = "translateX(50%) translateY(150%)"
+    }else if (data=='comp') {
+        playerCard.style.transform = "translateX(50%) translateY(-155%)"
+        compCard.style.transform = "translateX(50%)"
+    }else if (data=='war') {
+        playerCard.style.transform = "rotateY(0deg) translateX(140%) translateY(0)"
+        compCard.style.transform = "rotateY(0deg) translateX(140%) translateY(0)"
+        }
     setTimeout(() => {
-        classToggleFn()
-    },150)
-    setTimeout(() => {
-        playerCard.style.transform = "rotateY(0deg) translateX(0) translateY(0)"
-        compCard.style.transform = "rotateY(0deg) translateX(0) translateY(0)"
-    },150)
-    setTimeout(() => {
-        classToggleFn()
         playerCardImg.src = '/img/'+playerCardCode+'.png'
         compCardImg.src = '/img/'+compCardCode+'.png'
         playerCard.style.transform = "rotateY(180deg) translateX(-140%)"
         compCard.style.transform = "rotateY(180deg) translateX(-140%)"
-    }, 500)
+    },400)
 }
-
-
 function arrangeCards() {
-    classToggleFn()
-    cleanTable()
-    const res = checkWhoWin(playerCardCode.charAt(0), compCardCode.charAt(0))
-    if (res == 'war'){
+    cleanTable(roundWinner)
+    roundWinner = checkWhoWin(playerCardCode.charAt(0), compCardCode.charAt(0))
+    if (roundWinner == 'war'){
         warCount++
         compPile.length < 2? endGame('comp')
         : playerPile.length < 2? endGame('player')
         : war.push(playerCardCode, compCardCode,playerPile.shift(),compPile.shift())
     } else {
-        if (itsWar){;warCardToggle();itsWar=false}
-        res == 'player'? addToPile(playerPile): addToPile(compPile)
+        roundWinner == 'player'? addToPile(playerPile): addToPile(compPile)
     }
 }
 function addToPile(which) {
@@ -149,9 +119,9 @@ function addToPile(which) {
 function checkWhoWin(player, comp) {
     const pValue = deckOfCards.indexOf(player)
     const cValue = deckOfCards.indexOf(comp)
-    return  pValue>cValue? ('player', roundWinner = 'player')
-            :pValue<cValue? ('comp', roundWinner = 'comp')
-            :('war', roundWinner='war')
+    if (pValue==cValue){return 'war'
+    }else if (pValue>cValue) {return 'player'
+    }else {return 'comp'}
 }
 function endGame(who) {
     who=='player'?console.log('Player lost'):console.log('Player Win!')
