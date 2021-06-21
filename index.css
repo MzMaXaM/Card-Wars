@@ -1,51 +1,64 @@
-body{
+*{
     margin: 0;
     padding: 0;
+}
+
+body{
     background-color: darkolivegreen;
 }
 .mainDesk{
     position: relative;
     text-align: left;
     width: 90vw;
-    max-width: 700px;
+    max-width: 600px;
     height: 70%;
-    margin: 1% auto;
-    padding-bottom: 3%;
+    margin: 3% auto;
+    padding-bottom: 6%;
     background-color: green;
-    border: 3px solid darksalmon;
-    border-radius: 10px;
+    border: 4mm ridge rgba(47, 78, 79, .6);
+    border-radius: 25px;
     cursor: pointer;
     user-select: none;
+    overflow: hidden;
 }
 h2{
-    margin-left: 10%;
+    position: relative;
+    margin: 5% 10%;
 }
 .emptyCard{
     position: absolute;
     left: 0%;
     background-image: url("/img/back.jpg");
-    box-shadow: 5px -5px 8px 5px #1a1a1a;
-    width: 226px;
-    height: 314px;
-    border-radius: 16px;
+    box-shadow: -2px -2px 2px 2px #b8b8b8;
+    width: 113px;
+    height: 157px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 10px;
+}
+.warCard{
+    left: 140%;
+    top: 0%;
+    box-shadow: 0 0 0 0 #b8b8b8;
+    visibility: hidden;
 }
 .card{  
     position: relative;
     background-color: transparent;
-    margin-left: 12%;
-    width: 226px;
-    height: 314px;
-    box-shadow: 2px -2px 6px 4px #1a1a1a;
-    perspective: 1000px;
-    border-radius: 16px;
-    transition: transform 0.6s;
+    margin-left: 10%;
+    margin-top: 5%;
+    width: 113px;
+    height: 157px;
+    box-shadow: 2px 2px 6px 4px #1a1a1a;
+    perspective: 800px;
+    border-radius: 10px;
 }
 .cardInner {
+    position: relative;
     width: 100%;
     height: 100%;
-    transition: all .5s;
     transform-style: preserve-3d;
-    position: relative;
+    z-index: 2;
 }
 
 .cardBack, .cardFront {
@@ -57,23 +70,23 @@ h2{
     height: 100%;
     backface-visibility: hidden;
     overflow: hidden;
-    border-radius: 16px;
+    border-radius: 10px;
 }  
 .cardBack {
-    background-color: #2980b9;
-    color: white;
     transform: rotateY(180deg);
 }  
-.cardFront {
-    background-color: #bbb; 
-    color: black;
+img{
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 113px;
+    height: 157px;
 }
 
 .buttons{
     position: relative;
     width: 90%;
     max-width: 700px;
-    margin: 0 auto;
+    margin: 5% auto;
     display: flex;
     justify-content: space-around;
 }
@@ -84,4 +97,11 @@ button{
     padding: 1em;
     border-radius: .8em;
     cursor: pointer;
+}
+.transitStyle{
+    transition: all 0.5s;
+}
+.visibilityStyle{
+    visibility: visible;
+    z-index: 1;
 }
