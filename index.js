@@ -9,6 +9,7 @@ const compWarCard = document.getElementById('compWarCard')
 const playerCardImg = document.getElementById("playerCardImg")
 const compCardImg = document.getElementById("compCardImg")
 const key = 'fgb5419igfhc'
+let roundWinner = ''
 let bigData
 let war = []
 let warCount = 0
@@ -16,8 +17,8 @@ let playerPile = []
 let playerCardCode
 let compPile = []
 let compCardCode
-let roundWinner
 let hitCount = 0
+let itsWar
 
 const getCards = async (count) => {
     const res = await fetch('https://deckofcardsapi.com/api/deck/'+key+'/draw/?count='+count)
@@ -77,30 +78,65 @@ function getCardsFn() {
 }
 function cleanTable (data) {
     if (data=='player'){
-        playerCard.style.transform = "translateX(50%)"
-        compCard.style.transform = "translateX(50%) translateY(150%)"
+        setTimeout(() => {
+            playerCard.classList.add("shortMoveCardRight")
+            compCard.classList.add("longMoveCardRight")
+        },500)
+            playerCard.classList.remove("shortMoveCardRight")
+            compCard.classList.remove("longMoveCardRight")
     }else if (data=='comp') {
-        playerCard.style.transform = "translateX(50%) translateY(-155%)"
-        compCard.style.transform = "translateX(50%)"
+        setTimeout(() => {
+            playerCard.classList.add("longMoveCardLeft")
+            compCard.classList.add("shortMoveCardLeft")
+        },500)
+            playerCard.classList.remove("longMoveCardLeft")
+            compCard.classList.remove("shortMoveCardLeft")
     }else if (data=='war') {
-        playerCard.style.transform = "rotateY(0deg) translateX(140%) translateY(0)"
-        compCard.style.transform = "rotateY(0deg) translateX(140%) translateY(0)"
-        }
+        setTimeout(() => {
+            playerCard.classList.add("warAnim")
+            compCard.classList.add("warAnim")
+        },500)
+            playerCard.classList.remove("warAnim")
+            compCard.classList.remove("warAnim")
+         }
     setTimeout(() => {
-        playerCardImg.src = '/img/'+playerCardCode+'.png'
-        compCardImg.src = '/img/'+compCardCode+'.png'
-        playerCard.style.transform = "rotateY(180deg) translateX(-140%)"
-        compCard.style.transform = "rotateY(180deg) translateX(-140%)"
-    },400)
+        playerCardImg.src = './img/'+playerCardCode+'.png'
+        compCardImg.src = './img/'+compCardCode+'.png'
+    },500)
+    if (itsWar) {
+        setTimeout(() => {
+            playerWarCard.classList.add("bringThemFaceDown")
+            compWarCard.classList.add("bringThemFaceDown")
+        },500)
+        setTimeout(() => {
+            playerCard.classList.add("bringThemIn")
+            compCard.classList.add("bringThemIn")
+        },1000)
+        playerCard.classList.remove("bringThemIn")
+        compCard.classList.remove("bringThemIn")
+        playerWarCard.classList.remove("bringThemFaceDown")
+        compWarCard.classList.remove("bringThemFaceDown")
+        
+    } else {
+        setTimeout(() => {
+            playerCard.classList.add("bringThemIn")
+            compCard.classList.add("bringThemIn")
+        },500)
+            playerCard.classList.remove("bringThemIn")
+            compCard.classList.remove("bringThemIn")
+    }
+    itsWar=false
 }
+
 function arrangeCards() {
     cleanTable(roundWinner)
     roundWinner = checkWhoWin(playerCardCode.charAt(0), compCardCode.charAt(0))
     if (roundWinner == 'war'){
+        itsWar=true
         warCount++
-        compPile.length < 2? endGame('comp')
-        : playerPile.length < 2? endGame('player')
-        : war.push(playerCardCode, compCardCode,playerPile.shift(),compPile.shift())
+        if (compPile.length < 2){endGame('comp')}
+        if (playerPile.length < 2) {endGame('player')}
+        war.push(playerCardCode, compCardCode, playerPile.shift(), compPile.shift())
     } else {
         roundWinner == 'player'? addToPile(playerPile): addToPile(compPile)
     }
@@ -111,6 +147,7 @@ function addToPile(which) {
         which.push(compCardCode,playerCardCode)
         war.forEach(element => which.push(element))
         war=[]
+        itsWar=false
     }else{
         setPoints()
         which.push(compCardCode,playerCardCode)

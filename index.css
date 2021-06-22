@@ -25,23 +25,8 @@ h2{
     position: relative;
     margin: 5% 10%;
 }
-.emptyCard{
-    position: absolute;
-    left: 0%;
-    background-image: url("/img/back.jpg");
-    box-shadow: -2px -2px 2px 2px #b8b8b8;
-    width: 113px;
-    height: 157px;
-    background-repeat: no-repeat;
-    background-size: cover;
-    border-radius: 10px;
-}
-.warCard{
-    left: 140%;
-    top: 0%;
-    box-shadow: 0 0 0 0 #b8b8b8;
-    visibility: hidden;
-}
+/* --------------------------------Cards------------------------- */
+
 .card{  
     position: relative;
     background-color: transparent;
@@ -54,14 +39,21 @@ h2{
     border-radius: 10px;
 }
 .cardInner {
-    position: relative;
+    position: absolute;
     width: 100%;
     height: 100%;
     transform-style: preserve-3d;
-    transition: all .4s;
-    /* z-index: 2; */
+}.emptyCard{
+    position: absolute;
+    left: 0%;
+    background-image: url("./img/back.jpg");
+    box-shadow: -2px -2px 2px 2px #b8b8b8;
+    width: 113px;
+    height: 157px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 10px;
 }
-
 .cardBack, .cardFront {
     background-color: transparent;
     background-repeat: no-repeat;
@@ -82,7 +74,7 @@ img{
     width: 113px;
     height: 157px;
 }
-
+/* --------------------Buttons------------------------ */
 .buttons{
     position: relative;
     width: 90%;
@@ -98,4 +90,58 @@ button{
     padding: 1em;
     border-radius: .8em;
     cursor: pointer;
+}
+/* =============================================================== */
+.warAnim {
+    animation: warMove 0.5s forwards;
+}
+@keyframes warMove {
+    0%   {transform: translateX(0%) translateY(150%) rotateY(180deg)}
+    100% {transform: translateX(140%) translateY(100%) rotateY(0deg)}
+}
+
+/* -------------------------comp win-------------------------- */
+.shortMoveCardRight {
+    animation: shortMoveR 0.5s forwards;
+}
+@keyframes shortMoveR {
+    0%   {transform: translateX(140%) translateY(0%) rotateY(180deg)}
+    100% {transform: translateX(0%) translateY(-150%) rotateY(0deg)}
+}
+.longMoveCardRight {
+    animation: longMoveR 0.5s forwards;
+}
+@keyframes longMoveR {
+    0%   {transform: translateX(140%) translateY(0%) rotateY(180deg)}
+    100% {transform: translateX(0%) translateY(0%) rotateY(0deg)}
+}
+/* -------------------------player win------------------------ */
+.shortMoveCardLeft {
+    animation: shortMoveL 0.5s forwards;
+}
+@keyframes shortMoveL {
+    0%   {transform:translateX(140%) translateY(0%) rotateY(180deg)}
+    100% {transform:translateX(0%) translateY(150%) rotateY(0deg)}
+}
+.longMoveCardLeft {
+    animation: longMoveL 0.5s forwards;
+}
+@keyframes longMoveL {
+    0%   {transform: translateX(140%) translateY(0%) rotateY(180deg)}
+    100% {transform: translateX(0%) translateY(0%) rotateY(0deg)}
+}
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+.bringThemFaceDown{
+    animation: bringInFd 0.5s forwards;
+}
+@keyframes bringInFd {
+    0%   {transform: translateX(0%) translateY(0%) rotate(0deg)}
+    100% {transform: translateX(140%) translateY(0%) rotate(360deg)}
+}
+.bringThemIn {
+    animation: bringIn 0.5s forwards;
+}
+@keyframes bringIn {
+    0%   {transform: translateX(0%) translateY(0%) rotateY(0deg)}
+    100% {transform: translateX(140%) translateY(0%) rotateY(180deg)}
 }

@@ -10,33 +10,52 @@
 </head>
 <body>
     <div class="mainDesk" onclick="getCardsFn()">
+        <!-- ------------------cards----------------------------- -->
         <h2>Opponent Cards: <span id="compCount">25</span></h2>
+
         <div class="card">
-            <div class="emptyCard"></div>
+        <div class="emptyCard"></div>
             <div class="cardInner" id="compCard">
                 <div class="cardBack">
-                    <img src="/img/back.jpg" id="compCardImg">
+                    <img src="./img/back.jpg" id="compCardImg">
                 </div>
                 <div class="cardFront">
-                    <img src="/img/back.jpg">
+                    <img src="./img/back.jpg">
                 </div>
             </div>
-            <div class="emptyCard warCard" id="compWarCard"></div>
+            <div class="cardInner emptyCard" id="compWarCard">
+                <div class="cardBack">
+                    <img src="./img/back.jpg">
+                </div>
+                <div class="cardFront">
+                    <img src="./img/back.jpg">
+                </div>
+            </div>
         </div>
+
         <h2>Player Cards: <span id="playerCount">25</span></h2>
+
         <div class="card">
             <div class="emptyCard"></div>
-            <div class="cardInner" id="playerCard">
+            <div class="cardInner emptyCard" id="playerWarCard">
                 <div class="cardBack">
-                    <img src="/img/back.jpg" id="playerCardImg">
+                    <img src="./img/back.jpg">
                 </div>
                 <div class="cardFront">
-                    <img src="/img/back.jpg">
+                    <img src="./img/back.jpg">
                 </div>
             </div>
-            <div class="emptyCard warCard" id="playerWarCard"></div>
+            <div class="cardInner" id="playerCard">
+                <div class="cardBack">
+                    <img src="./img/back.jpg" id="playerCardImg">
+                </div>
+                <div class="cardFront">
+                    <img src="./img/back.jpg">
+                </div>
+            </div>
         </div>
     </div>
+<!-- --------------------------buttons------------------------ -->
     <div class="buttons">
         <button onclick="shuffleCards()">Shuffle Cards</button>
         <button onclick="autoBattle()">Auto Battle</button>
