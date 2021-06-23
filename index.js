@@ -10,6 +10,7 @@ const playerCardImg = document.getElementById("playerCardImg")
 const compCardImg = document.getElementById("compCardImg")
 const key = 'fgb5419igfhc'
 let roundWinner = ''
+let lastRound
 let bigData
 let war = []
 let warCount = 0
@@ -18,7 +19,6 @@ let playerCardCode
 let compPile = []
 let compCardCode
 let hitCount = 0
-let itsWar
 
 const getCards = async (count) => {
     const res = await fetch('https://deckofcardsapi.com/api/deck/'+key+'/draw/?count='+count)
@@ -77,62 +77,60 @@ function getCardsFn() {
     arrangeCards()
 }
 function cleanTable (data) {
-    if (data=='player'){
+    if (data == 'war') {
+        // setTimeout(() => {
+        //     playerCard.classList.add("warAnim")
+        //     compCard.classList.add("warAnim")
+        // },500)
+        //     playerCard.classList.remove("warAnim")
+        //     compCard.classList.remove("warAnim")
+        playerWarCard.classList.add("bringThemFaceDown")
+        compWarCard.classList.add("bringThemFaceDown")
+        // setTimeout(() => {
+            playerWarCard.classList.remove("bringThemFaceDown")
+            compWarCard.classList.remove("bringThemFaceDown")
+        // },500)
+    }
+    if (data =='player'){
         setTimeout(() => {
             playerCard.classList.add("shortMoveCardRight")
             compCard.classList.add("longMoveCardRight")
         },500)
             playerCard.classList.remove("shortMoveCardRight")
             compCard.classList.remove("longMoveCardRight")
-    }else if (data=='comp') {
+    }
+    if (data =='comp') {
         setTimeout(() => {
             playerCard.classList.add("longMoveCardLeft")
             compCard.classList.add("shortMoveCardLeft")
         },500)
             playerCard.classList.remove("longMoveCardLeft")
             compCard.classList.remove("shortMoveCardLeft")
-    }else if (data=='war') {
-        setTimeout(() => {
-            playerCard.classList.add("warAnim")
-            compCard.classList.add("warAnim")
-        },500)
-            playerCard.classList.remove("warAnim")
-            compCard.classList.remove("warAnim")
-         }
+    }
+    if (lastRound=='war') {
+        playerWarCard.style.visibility = "hidden"
+        compWarCard.style.visibility = "hidden"
+    }
+    
+}
+function bringTheNewCards(){
     setTimeout(() => {
         playerCardImg.src = './img/'+playerCardCode+'.png'
         compCardImg.src = './img/'+compCardCode+'.png'
     },500)
-    if (itsWar) {
-        setTimeout(() => {
-            playerWarCard.classList.add("bringThemFaceDown")
-            compWarCard.classList.add("bringThemFaceDown")
-        },500)
-        setTimeout(() => {
-            playerCard.classList.add("bringThemIn")
-            compCard.classList.add("bringThemIn")
-        },1000)
+    setTimeout(() => {
+        playerCard.classList.add("bringThemIn")
+        compCard.classList.add("bringThemIn")
+    },500)
         playerCard.classList.remove("bringThemIn")
         compCard.classList.remove("bringThemIn")
-        playerWarCard.classList.remove("bringThemFaceDown")
-        compWarCard.classList.remove("bringThemFaceDown")
-        
-    } else {
-        setTimeout(() => {
-            playerCard.classList.add("bringThemIn")
-            compCard.classList.add("bringThemIn")
-        },500)
-            playerCard.classList.remove("bringThemIn")
-            compCard.classList.remove("bringThemIn")
-    }
-    itsWar=false
 }
-
 function arrangeCards() {
     cleanTable(roundWinner)
+    lastRound=roundWinner
     roundWinner = checkWhoWin(playerCardCode.charAt(0), compCardCode.charAt(0))
+    bringTheNewCards()
     if (roundWinner == 'war'){
-        itsWar=true
         warCount++
         if (compPile.length < 2){endGame('comp')}
         if (playerPile.length < 2) {endGame('player')}
@@ -147,7 +145,6 @@ function addToPile(which) {
         which.push(compCardCode,playerCardCode)
         war.forEach(element => which.push(element))
         war=[]
-        itsWar=false
     }else{
         setPoints()
         which.push(compCardCode,playerCardCode)
@@ -156,6 +153,7 @@ function addToPile(which) {
 function checkWhoWin(player, comp) {
     const pValue = deckOfCards.indexOf(player)
     const cValue = deckOfCards.indexOf(comp)
+    // return 'war'
     if (pValue==cValue){return 'war'
     }else if (pValue>cValue) {return 'player'
     }else {return 'comp'}

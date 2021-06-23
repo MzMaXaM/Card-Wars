@@ -96,20 +96,24 @@ button{
     animation: warMove 0.5s forwards;
 }
 @keyframes warMove {
-    0%   {transform: translateX(0%) translateY(150%) rotateY(180deg)}
-    100% {transform: translateX(140%) translateY(100%) rotateY(0deg)}
+    0%   {transform: translateX(140%) translateY(0%) rotateY(180deg)}
+    100% {transform: translateX(140%) translateY(0%) rotateY(0deg)}
 }
 
 /* -------------------------comp win-------------------------- */
 .shortMoveCardRight {
     animation: shortMoveR 0.5s forwards;
+    z-index: 5;
 }
 @keyframes shortMoveR {
     0%   {transform: translateX(140%) translateY(0%) rotateY(180deg)}
-    100% {transform: translateX(0%) translateY(-150%) rotateY(0deg)}
+    25%   {transform: translateX(160%) translateY(-50%) rotateY(180deg)}
+    50%   {transform: translateX(100%) translateY(-110%) rotateY(180deg)}
+    100% {transform: translateX(0%) translateY(-120%) rotateY(0deg)}
 }
 .longMoveCardRight {
     animation: longMoveR 0.5s forwards;
+    z-index: 3;
 }
 @keyframes longMoveR {
     0%   {transform: translateX(140%) translateY(0%) rotateY(180deg)}
@@ -118,13 +122,17 @@ button{
 /* -------------------------player win------------------------ */
 .shortMoveCardLeft {
     animation: shortMoveL 0.5s forwards;
+    z-index: 5;
 }
 @keyframes shortMoveL {
-    0%   {transform:translateX(140%) translateY(0%) rotateY(180deg)}
-    100% {transform:translateX(0%) translateY(150%) rotateY(0deg)}
+    0%   {transform:translateX(140%) translateY(0%) rotateY(-180deg)}
+    25%   {transform:translateX(160%) translateY(50%) rotateY(-180deg)}
+    50%   {transform:translateX(100%) translateY(110%) rotateY(-180deg)}
+    100% {transform:translateX(0%) translateY(120%) rotateY(0deg)}
 }
 .longMoveCardLeft {
     animation: longMoveL 0.5s forwards;
+    z-index: 3;
 }
 @keyframes longMoveL {
     0%   {transform: translateX(140%) translateY(0%) rotateY(180deg)}
@@ -133,6 +141,8 @@ button{
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 .bringThemFaceDown{
     animation: bringInFd 0.5s forwards;
+    visibility: visible;
+    z-index: 2;
 }
 @keyframes bringInFd {
     0%   {transform: translateX(0%) translateY(0%) rotate(0deg)}
@@ -140,8 +150,9 @@ button{
 }
 .bringThemIn {
     animation: bringIn 0.5s forwards;
+    z-index: 5;
 }
 @keyframes bringIn {
     0%   {transform: translateX(0%) translateY(0%) rotateY(0deg)}
-    100% {transform: translateX(140%) translateY(0%) rotateY(180deg)}
+    100% {transform: translateX(140%) translateY(0%) rotateY(-180deg)}
 }
