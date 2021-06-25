@@ -5,7 +5,7 @@
 }
 
 body{
-    background-color: rgb(36, 39, 36);
+    background-color: rgb(36, 36, 36);
 }
 .mainDesk{
     position: relative;
@@ -15,10 +15,10 @@ body{
     height: 70%;
     margin: 3% auto;
     padding-bottom: 6%;
-    background-color: rgb(62, 121, 62);
+    background-color: rgb(62, 122, 62);
     border: .3em ridge ;
-    border-top-color: rgb(160, 231, 150);
-    border-left-color: rgb(160, 231, 150);
+    border-top-color: rgb(160, 232, 150);
+    border-left-color: rgb(160, 232, 150);
     border-bottom-color: rgb(30, 100, 30);
     border-right-color: rgb(30, 100, 30);
     border-radius: 25px;
@@ -26,16 +26,16 @@ body{
     user-select: none;
     overflow: hidden;
 }
-h2{
-    font-size: large;
+h1{
+    font-size: x-large;
     position: relative;
     margin: 5% 10%;
     text-shadow: 3px 3px  4px rgb(16, 27, 16);
 }
-.compSide>h2{
+.compSide>h1{
     color: rgb(218, 139, 139);
 }
-.playerSide>h2{
+.playerSide>h1{
     color: rgb(134, 165, 231);
 }
 /* --------------------------------Cards------------------------- */
@@ -103,9 +103,6 @@ button{
     padding: 1em;
     border-radius: .8em;
     cursor: pointer;
-}
-.invis{
-    visibility: hidden;
 }
 /* =============================================================== */
 
