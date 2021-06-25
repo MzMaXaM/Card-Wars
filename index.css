@@ -1,29 +1,42 @@
 *{
     margin: 0;
     padding: 0;
+    font-family: 'Merriweather Sans', sans-serif;
 }
 
 body{
-    background-color: darkolivegreen;
+    background-color: rgb(36, 39, 36);
 }
 .mainDesk{
     position: relative;
-    text-align: left;
+    text-align: center;
     width: 90vw;
     max-width: 600px;
     height: 70%;
     margin: 3% auto;
     padding-bottom: 6%;
-    background-color: green;
-    border: 4mm ridge rgba(47, 78, 79, .6);
+    background-color: rgb(62, 121, 62);
+    border: .3em ridge ;
+    border-top-color: rgb(160, 231, 150);
+    border-left-color: rgb(160, 231, 150);
+    border-bottom-color: rgb(30, 100, 30);
+    border-right-color: rgb(30, 100, 30);
     border-radius: 25px;
     cursor: pointer;
     user-select: none;
     overflow: hidden;
 }
 h2{
+    font-size: large;
     position: relative;
     margin: 5% 10%;
+    text-shadow: 3px 3px  4px rgb(16, 27, 16);
+}
+.compSide>h2{
+    color: rgb(218, 139, 139);
+}
+.playerSide>h2{
+    color: rgb(134, 165, 231);
 }
 /* --------------------------------Cards------------------------- */
 
@@ -34,7 +47,7 @@ h2{
     margin-top: 5%;
     width: 113px;
     height: 157px;
-    box-shadow: 2px 2px 6px 4px #1a1a1a;
+    box-shadow: 2px 2px 6px 4px #2b2e2c;
     perspective: 800px;
     border-radius: 10px;
 }
@@ -47,7 +60,7 @@ h2{
     position: absolute;
     left: 0%;
     background-image: url("./img/back.jpg");
-    box-shadow: -2px -2px 2px 2px #b8b8b8;
+    box-shadow: -2px -2px 2px 2px #a0b9a3;
     width: 113px;
     height: 157px;
     background-repeat: no-repeat;
@@ -85,71 +98,76 @@ img{
 }
 button{
     position: relative;
-    font-size: large;
+    font-size: 1200;
     width: 9em;
     padding: 1em;
     border-radius: .8em;
     cursor: pointer;
 }
+.invis{
+    visibility: hidden;
+}
 /* =============================================================== */
-.warAnim {
-    animation: warMove 0.5s forwards;
-}
-@keyframes warMove {
-    0%   {transform: translateX(140%) translateY(0%) rotateY(180deg)}
-    100% {transform: translateX(140%) translateY(0%) rotateY(0deg)}
-}
 
-/* -------------------------comp win-------------------------- */
-.shortMoveCardRight {
-    animation: shortMoveR 0.5s forwards;
-    z-index: 5;
-}
-@keyframes shortMoveR {
-    0%   {transform: translateX(140%) translateY(0%) rotateY(180deg)}
-    25%   {transform: translateX(160%) translateY(-50%) rotateY(180deg)}
-    50%   {transform: translateX(100%) translateY(-110%) rotateY(180deg)}
-    100% {transform: translateX(0%) translateY(-120%) rotateY(0deg)}
-}
-.longMoveCardRight {
-    animation: longMoveR 0.5s forwards;
+.longMoveCompWin {
+    animation: longMoveCw 0.5s forwards linear;
     z-index: 3;
 }
-@keyframes longMoveR {
+@keyframes shortMoveCw {
     0%   {transform: translateX(140%) translateY(0%) rotateY(180deg)}
+    25%   {transform: translateX(160%) translateY(50%) rotateY(180deg)}
+    50%   {transform: translateX(100%) translateY(110%) rotateY(180deg)}
+    100% {transform: translateX(0%) translateY(120%) rotateY(0deg)}
+}
+.shortMoveCompWin {
+    animation: shortMoveCw 0.5s forwards linear;
+    z-index: 5;
+}
+@keyframes longMoveCw {
+    0%   {transform: translateX(140%) translateY(0%) rotateY(180deg)}
+    50%   {transform: translateX(120%) translateY(-20%) rotateY(180deg)}
     100% {transform: translateX(0%) translateY(0%) rotateY(0deg)}
 }
-/* -------------------------player win------------------------ */
-.shortMoveCardLeft {
-    animation: shortMoveL 0.5s forwards;
+.longMovePlayerWin {
+    animation: longMovePw 0.5s forwards linear;
     z-index: 5;
 }
-@keyframes shortMoveL {
+@keyframes shortMovePw {
     0%   {transform:translateX(140%) translateY(0%) rotateY(-180deg)}
-    25%   {transform:translateX(160%) translateY(50%) rotateY(-180deg)}
-    50%   {transform:translateX(100%) translateY(110%) rotateY(-180deg)}
-    100% {transform:translateX(0%) translateY(120%) rotateY(0deg)}
+    25%   {transform:translateX(160%) translateY(-50%) rotateY(-180deg)}
+    50%   {transform:translateX(100%) translateY(-110%) rotateY(-180deg)}
+    100% {transform:translateX(0%) translateY(-120%) rotateY(0deg)}
 }
-.longMoveCardLeft {
-    animation: longMoveL 0.5s forwards;
+.shortMovePlayerWin {
+    animation: shortMovePw 0.5s forwards linear;
     z-index: 3;
 }
-@keyframes longMoveL {
-    0%   {transform: translateX(140%) translateY(0%) rotateY(180deg)}
+@keyframes longMovePw {
+    0%   {transform: translateX(140%) translateY(0%) rotateY(-180deg)}
+    50%   {transform: translateX(120%) translateY(20%) rotateY(-180deg)}
     100% {transform: translateX(0%) translateY(0%) rotateY(0deg)}
 }
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
-.bringThemFaceDown{
-    animation: bringInFd 0.5s forwards;
+.bringThemFaceDown {
+    animation: bringInFd 0.5s forwards linear;
+    z-index: 6;
+    box-shadow: none;
     visibility: visible;
-    z-index: 2;
 }
 @keyframes bringInFd {
-    0%   {transform: translateX(0%) translateY(0%) rotate(0deg)}
-    100% {transform: translateX(140%) translateY(0%) rotate(360deg)}
+    0%   {transform: translateX(0%) translateY(0%) rotate(360deg)}
+    100% {transform: translateX(140%) translateY(0%) rotate(30deg)}
+}
+.cleanFaceDown {
+    animation: warMove 0.2s forwards linear;
+    z-index: 2;
+}
+@keyframes warMove {
+    0%   {transform: translateX(140%) translateY(0%) rotate(0deg)}
+    100% {transform: translateX(0%) translateY(0%) rotate(0deg)}
 }
 .bringThemIn {
-    animation: bringIn 0.5s forwards;
+    animation: bringIn 0.5s forwards linear;
     z-index: 5;
 }
 @keyframes bringIn {

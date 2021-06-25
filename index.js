@@ -63,7 +63,7 @@ function setPiles(data) {
     })
     playerPile = tArray.slice(0,26)
     compPile = tArray.slice(26,53)
-    setPoints()
+    if (roundWinner !== ''){setPoints()}
     getCardsFn()
 }
 function getCardsFn() {
@@ -76,44 +76,33 @@ function getCardsFn() {
     compCardCode = compPile.shift()
     arrangeCards()
 }
-function cleanTable (data) {
-    if (data == 'war') {
-        // setTimeout(() => {
-        //     playerCard.classList.add("warAnim")
-        //     compCard.classList.add("warAnim")
-        // },500)
-        //     playerCard.classList.remove("warAnim")
-        //     compCard.classList.remove("warAnim")
-        playerWarCard.classList.add("bringThemFaceDown")
-        compWarCard.classList.add("bringThemFaceDown")
-        // setTimeout(() => {
-            playerWarCard.classList.remove("bringThemFaceDown")
-            compWarCard.classList.remove("bringThemFaceDown")
-        // },500)
-    }
-    if (data =='player'){
+function cleanTable (winerIs) {
+    if (winerIs =='player' && winerIs !='war'){
         setTimeout(() => {
-            playerCard.classList.add("shortMoveCardRight")
-            compCard.classList.add("longMoveCardRight")
+            playerCard.classList.add("shortMovePlayerWin")
+            compCard.classList.add("longMovePlayerWin")
         },500)
-            playerCard.classList.remove("shortMoveCardRight")
-            compCard.classList.remove("longMoveCardRight")
+        playerCard.classList.remove("shortMovePlayerWin")
+        compCard.classList.remove("longMovePlayerWin")
     }
-    if (data =='comp') {
+    if (winerIs =='comp' && winerIs !='war') {
         setTimeout(() => {
-            playerCard.classList.add("longMoveCardLeft")
-            compCard.classList.add("shortMoveCardLeft")
+            compCard.classList.add("shortMoveCompWin")
+            playerCard.classList.add("longMoveCompWin")
         },500)
-            playerCard.classList.remove("longMoveCardLeft")
-            compCard.classList.remove("shortMoveCardLeft")
+        compCard.classList.remove("shortMoveCompWin")
+        playerCard.classList.remove("longMoveCompWin")
     }
-    if (lastRound=='war') {
-        playerWarCard.style.visibility = "hidden"
-        compWarCard.style.visibility = "hidden"
+    if (winerIs=='war') {
+        setTimeout(() => {
+            playerWarCard.classList.add("cleanFaceDown")
+            compWarCard.classList.add("cleanFaceDown")
+        },500)
+        playerWarCard.classList.remove("cleanFaceDown")
+        compWarCard.classList.remove("cleanFaceDown")
     }
-    
 }
-function bringTheNewCards(){
+function bringTheNewCards(stateOfTable){
     setTimeout(() => {
         playerCardImg.src = './img/'+playerCardCode+'.png'
         compCardImg.src = './img/'+compCardCode+'.png'
@@ -122,21 +111,30 @@ function bringTheNewCards(){
         playerCard.classList.add("bringThemIn")
         compCard.classList.add("bringThemIn")
     },500)
-        playerCard.classList.remove("bringThemIn")
-        compCard.classList.remove("bringThemIn")
+    playerCard.classList.remove("bringThemIn")
+    compCard.classList.remove("bringThemIn")
+    if (stateOfTable == 'war') {
+        setTimeout(() => {
+            playerWarCard.classList.add("bringThemFaceDown")
+            compWarCard.classList.add("bringThemFaceDown")
+        },900)
+        playerWarCard.classList.remove("bringThemFaceDown")
+        compWarCard.classList.remove("bringThemFaceDown")
+        
+        setTimeout(() => getCardsFn(),1600)
+    }
 }
 function arrangeCards() {
     cleanTable(roundWinner)
     lastRound=roundWinner
     roundWinner = checkWhoWin(playerCardCode.charAt(0), compCardCode.charAt(0))
-    bringTheNewCards()
+    bringTheNewCards(roundWinner)
     if (roundWinner == 'war'){
-        warCount++
         if (compPile.length < 2){endGame('comp')}
         if (playerPile.length < 2) {endGame('player')}
         war.push(playerCardCode, compCardCode, playerPile.shift(), compPile.shift())
     } else {
-        roundWinner == 'player'? addToPile(playerPile): addToPile(compPile)
+        roundWinner =='player'?addToPile(playerPile):addToPile(compPile)
     }
 }
 function addToPile(which) {
@@ -153,11 +151,14 @@ function addToPile(which) {
 function checkWhoWin(player, comp) {
     const pValue = deckOfCards.indexOf(player)
     const cValue = deckOfCards.indexOf(comp)
-    // return 'war'
-    if (pValue==cValue){return 'war'
-    }else if (pValue>cValue) {return 'player'
-    }else {return 'comp'}
+    if (pValue==cValue){
+        warCount++
+        alert('war!!')
+        return 'war'
+    }else return pValue>cValue?'player':'comp'
 }
 function endGame(who) {
-    who=='player'?console.log('Player lost'):console.log('Player Win!')
+    who=='player'?alert('Hey you win!!!'):alert('Bad luck, try again?')
+    roundWinner = ''
+    shuffleCards()
 }

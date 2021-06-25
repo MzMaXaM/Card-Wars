@@ -6,54 +6,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Card-Wars</title>
     <link rel="stylesheet" href="index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather+Sans&display=swap" rel="stylesheet">
     <script src="index.js" defer></script>
 </head>
 <body>
     <div class="mainDesk" onclick="getCardsFn()">
-        <!-- ------------------cards----------------------------- -->
-        <h2>Opponent Cards: <span id="compCount">25</span></h2>
+            <!-- ------------------cards----------------------------- -->
+        <div class="compSide">
+            <h2>Opponent Cards: <span id="compCount">25</span></h2>
 
-        <div class="card">
-        <div class="emptyCard"></div>
-            <div class="cardInner" id="compCard">
-                <div class="cardBack">
-                    <img src="./img/back.jpg" id="compCardImg">
-                </div>
-                <div class="cardFront">
-                    <img src="./img/back.jpg">
-                </div>
-            </div>
-            <div class="cardInner emptyCard" id="compWarCard">
-                <div class="cardBack">
-                    <img src="./img/back.jpg">
-                </div>
-                <div class="cardFront">
-                    <img src="./img/back.jpg">
-                </div>
-            </div>
-        </div>
-
-        <div class="card">
+            <div class="card">
             <div class="emptyCard"></div>
-            <div class="cardInner emptyCard" id="playerWarCard">
-                <div class="cardBack">
-                    <img src="./img/back.jpg">
+                <div class="cardInner" id="compCard">
+                    <div class="cardBack">
+                        <img src="./img/back.jpg" id="compCardImg">
+                    </div>
+                    <div class="cardFront">
+                        <img src="./img/back.jpg">
+                    </div>
                 </div>
-                <div class="cardFront">
-                    <img src="./img/back.jpg">
-                </div>
-            </div>
-            <div class="cardInner" id="playerCard">
-                <div class="cardBack">
-                    <img src="./img/back.jpg" id="playerCardImg">
-                </div>
-                <div class="cardFront">
-                    <img src="./img/back.jpg">
+                <div class="cardInner emptyCard" id="compWarCard">
+                    <div class="cardBack">
+                        <img src="./img/back.jpg">
+                    </div>
+                    <div class="cardFront">
+                        <img src="./img/back.jpg">
+                    </div>
                 </div>
             </div>
         </div>
-        
-        <h2>Player Cards: <span id="playerCount">25</span></h2>
+        <div class="playerSide">
+                <div class="card">
+                    <div class="emptyCard"></div>
+                    <div class="cardInner emptyCard" id="playerWarCard">
+                        <div class="cardBack">
+                            <img src="./img/back.jpg">
+                        </div>
+                        <div class="cardFront">
+                            <img src="./img/back.jpg">
+                        </div>
+                    </div>
+                    <div class="cardInner" id="playerCard">
+                        <div class="cardBack">
+                            <img src="./img/back.jpg" id="playerCardImg">
+                        </div>
+                        <div class="cardFront">
+                            <img src="./img/back.jpg">
+                        </div>
+                    </div>
+                </div>
+                
+                <h2>Player Cards: <span id="playerCount">25</span></h2>
+        </div>
     </div>
 <!-- --------------------------buttons------------------------ -->
     <div class="buttons">
