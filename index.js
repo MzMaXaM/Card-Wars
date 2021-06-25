@@ -153,7 +153,7 @@ function checkWhoWin(player, comp) {
     const cValue = deckOfCards.indexOf(comp)
     if (pValue==cValue){
         warCount++
-        alert('war!!')
+        //alert('war!!')
         return 'war'
     }else return pValue>cValue?'player':'comp'
 }
